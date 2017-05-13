@@ -1,0 +1,11 @@
+<ion-view title="Vendas" id="page2">
+  <ion-nav-buttons side="right" class="has-header">
+    <button class="button button-icon icon ion-android-cart"></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+    <a ui-sref="tabsController.venda" id="produtos-button2" class="button button-positive  button-block icon-right ion-android-add-circle">Adicionar</a>
+    <ion-list id="vendas-list2" ng-repeat="venda in vendas track by $index">
+      <ion-item id="vendas-list-item" ng-click="direcionaVenda($index)">{{venda.desc}}</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

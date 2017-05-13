@@ -1,0 +1,25 @@
+<ion-view title="Produto" id="page6">
+  <ion-content padding="true" class="has-header">
+    <form id="produto-form1" class="list">
+      <label class="item item-input" id="produto-input1" name="nome">
+        <span class="input-label">Nome</span>
+        <input ng-model="produto.nome" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="produto-input2" name="valor">
+        <span class="input-label">Valor</span>
+        <input ng-model="produto.valor" type="number" placeholder="">
+      </label>
+      <label class="item item-select" id="produto-select1" name="tipo">
+        <span class="input-label">Tipo</span>
+        <select ng-model="produto.tipo">
+          <option>comida</option>
+          <option>bebida</option>
+          <option>outros</option>
+        </select>
+      </label>
+    </form>
+    <button ng-show="novo" id="produto-button3" class="button button-positive  button-block" ng-click="add(produto)">Cadastrar</button>
+    <button ng-show="!novo" id="produto-button3" class="button button-positive  button-block" ng-click="update()">Atualizar</button>
+    <button id="produto-button3" class="button button-positive  button-block" ng-click="remove(produto)">Remover</button>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,52 @@
+<ion-view title="Venda" id="page5">
+  <ion-content padding="true" class="has-header">
+    <form id="venda-form1" class="list">
+
+		<label class="item item-input" id="venda-input2" name="valor">
+			<span class="input-label">Valor</span>
+			<input ng-model="venda.valor" type="number" placeholder="">
+		</label>
+
+		<label class="item item-input" id="venda-input1" name="nome">
+			<span class="input-label">Descrição</span>
+			<input ng-model="venda.desc" type="text" placeholder="">
+		</label>
+
+		<label class="item item-select" id="venda-select1" name="tipo">
+			<span class="input-label">Categoria</span>
+			<select ng-model="venda.categoria">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+			</select>
+		</label>
+
+		<label class="item item-input" id="venda-input2" name="valor">
+			<span class="input-label">Produtos</span>
+		</label>
+
+
+
+			<ion-list id="produtos-list" ng-repeat="produto in produtos track by $index">
+			
+		      	<ion-item id="produtos-list-item">
+		      		<h2>{{produto.nome}}</h2>
+		      		<p>Valor: {{produto.valor}}</p>
+		      		<p>Quantidade</p>
+		      		<input  type="number" ng-model="produto.quantidade" style="float: right; margin-top: -30px; margin-bottom: 0;"></input>
+		  		</ion-item>
+		    </ion-list>
+
+		<label class="item item-input" id="venda-input2" name="valor">
+			<span class="input-label">Total</span>
+			<h2>{{venda.total}}</h2>
+		</label>
+
+      
+
+    </form>
+    <button ng-show="novo" id="produto-button3" class="button button-positive  button-block" ng-click="add(venda)">Cadastrar</button>
+    <button ng-show="!novo" id="produto-button3" class="button button-positive  button-block" ng-click="update()">Atualizar</button>
+    <button id="produto-button3" class="button button-positive  button-block" ng-click="remove(venda)">Remover</button>
+  </ion-content>
+</ion-view>
