@@ -3,8 +3,8 @@
     <form id="venda-form1" class="list">
 
 		<label class="item item-input" id="venda-input2" name="valor">
-			<span class="input-label">Valor</span>
-			<input ng-model="venda.valor" type="number" placeholder="">
+			<span class="input-label">Pagamento</span>
+			<input ng-model="venda.pagamento" type="number" placeholder="">
 		</label>
 
 		<label class="item item-input" id="venda-input1" name="nome">
@@ -28,7 +28,7 @@
 
 
 			<ion-list id="produtos-list" ng-repeat="produto in produtos track by $index">
-			
+
 		      	<ion-item id="produtos-list-item">
 		      		<h2>{{produto.nome}}</h2>
 		      		<p>Valor: {{produto.valor}}</p>
@@ -42,7 +42,7 @@
 			<h2>{{venda.total}}</h2>
 		</label>
 
-      
+
 
     </form>
     <button ng-show="novo" id="produto-button3" class="button button-positive  button-block" ng-click="add(venda)">Cadastrar</button>

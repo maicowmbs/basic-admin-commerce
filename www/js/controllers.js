@@ -1,5 +1,5 @@
 angular.module('app.controllers', [])
-  
+
 .controller('vendasCtrl', ['$scope', '$stateParams', '$state','StorageServiceVendas',
 function ($scope, $stateParams, $state, StorageServiceVendas) {
 
@@ -39,13 +39,11 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 		var produto = {
 			nome: $scope.produtosStorage[i].nome,
 			valor: $scope.produtosStorage[i].valor,
+      id: $scope.produtosStorage[i].id,
 			quantidade: 0
 		};
-		for (var j = 0; j < Things.length; j++) {
-			Things[j]
-		};
 		$scope.produtos.push(produto);
-		
+
 	};
 
 	$scope.add = function(newItem){
@@ -78,7 +76,7 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 
 
 }])
-   
+
 .controller('produtosCtrl', ['$scope', '$stateParams', '$state', '$window', 'StorageServiceProdutos',
 function ($scope, $stateParams, $state, $window, StorageServiceProdutos) {
 
@@ -126,7 +124,7 @@ function ($scope, $stateParams, $state, StorageServiceProdutos) {
 	};
 
 }])
-   
+
 .controller('relatRioCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -134,8 +132,3 @@ function ($scope, $stateParams) {
 
 
 }])
-      
-
-   
-
- 

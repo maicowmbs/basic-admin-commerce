@@ -11,7 +11,8 @@ angular.module('app.services', ['ngStorage'])
 .factory ('StorageServiceProdutos', function ($localStorage) {
 
   $localStorage = $localStorage.$default({
-    produtos: []
+    produtos: [],
+    contadorProduto: 0
   });
 
   var _getAll = function () {
@@ -23,6 +24,8 @@ angular.module('app.services', ['ngStorage'])
   }
 
   var _add = function (produto) {
+    produto.id=$localStorage.contadorProduto;
+    $localStorage.contadorProduto++;
     $localStorage.produtos.push(produto);
   }
 
@@ -46,7 +49,8 @@ angular.module('app.services', ['ngStorage'])
 .factory ('StorageServiceVendas', function ($localStorage) {
 
   $localStorage = $localStorage.$default({
-    vendas: []
+    vendas: [],
+    contadorVendas: 0
   });
 
   var _getAll = function () {
@@ -58,6 +62,8 @@ angular.module('app.services', ['ngStorage'])
   }
 
   var _add = function (venda) {
+    produto.id=$localStorage.contadorVendas;
+    $localStorage.contadorVendas++;
     $localStorage.vendas.push(venda);
   }
 
