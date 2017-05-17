@@ -5,7 +5,16 @@
   <ion-content padding="true" class="has-header">
     <a ui-sref="tabsController.venda" id="produtos-button2" class="button button-positive  button-block icon-right ion-android-add-circle">Adicionar</a>
     <ion-list id="vendas-list2" ng-repeat="venda in vendas track by $index">
-      <ion-item id="vendas-list-item" ng-click="direcionaVenda($index)">{{venda.desc}}</ion-item>
+      <ion-item id="vendas-list-item" ng-click="direcionaVenda($index)">
+        <h3>Venda: {{venda.id + 1}}</h3>
+        <p ng-if="venda.total">Total: {{venda.total}}</p>
+        <p ng-if="venda.desc">{{venda.desc}}</p>
+      </ion-item>
     </ion-list>
+    <div style="text-align: center;">
+      <button class="button button-outline icon-right ion-share button-balanced" ng-click="share()">
+        Compartilhar
+      </button>
+    </div>
   </ion-content>
 </ion-view>

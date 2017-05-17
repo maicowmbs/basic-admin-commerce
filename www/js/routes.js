@@ -9,6 +9,7 @@ angular.module('app.routes', [])
   $stateProvider
 
   .state('tabsController.relatRio', {
+    cache: false,
     url: '/relatório',
     views: {
       'tab3': {
@@ -19,14 +20,14 @@ angular.module('app.routes', [])
   })
 
   .state('tabsController', {
+    cache: false,
     url: '/page1',
     templateUrl: 'templates/tabsController.html',
     abstract:true
   })
 
-
-
   .state('tabsController.vendas', {
+    cache: false,
     url: '/vendas',
     views: {
       'tab1': {
@@ -36,18 +37,18 @@ angular.module('app.routes', [])
     }
   })
   .state('tabsController.venda', {
+    cache: false,
     url: '/venda/:indexArray',
     views: {
       'tab1': {
         templateUrl: 'templates/venda.html',
         controller: 'vendaCtrl'
       }
-    } 
+    }
   })
 
-
-
   .state('tabsController.produtos', {
+    cache: false,
     url: '/produtos',
     views: {
       'tab2': {
@@ -57,6 +58,7 @@ angular.module('app.routes', [])
     }
   })
   .state('tabsController.produto', {
+    cache: false,
     url: '/produto/:indexArray',
     views: {
       'tab2': {
@@ -68,6 +70,6 @@ angular.module('app.routes', [])
 
 $urlRouterProvider.otherwise('/page1/vendas')
 
-  
+
 
 });
