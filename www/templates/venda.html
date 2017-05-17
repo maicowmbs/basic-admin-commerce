@@ -6,6 +6,14 @@
 			<span class="input-label">Pagamento</span>
 			<input ng-model="venda.pagamento" type="number" placeholder="">
 		</label>
+		<label class="item item-input" id="venda-input2" name="valor">
+			<span class="input-label">Total</span>
+			<h2>{{venda.total}}</h2>
+		</label>
+		<label class="item item-input" id="venda-input2" name="troco">
+			<span class="input-label">Troco</span>
+			<h2>{{venda.troco}}</h2>
+		</label>
 
 		<label class="item item-input" id="venda-input1" name="nome">
 			<span class="input-label">Descrição</span>
@@ -29,18 +37,19 @@
 
 			<ion-list id="produtos-list" ng-repeat="produto in produtos track by $index">
 
-		      	<ion-item id="produtos-list-item">
+		      <ion-item id="produtos-list-item" class="item item-icon-left item-icon-right">
+						<i class="icon ion-minus-circled" ng-click="removeProduto()"></i>
+
 		      		<h2>{{produto.nome}}</h2>
 		      		<p>Valor: {{produto.valor}}</p>
 		      		<p>Quantidade</p>
-		      		<input  type="number" ng-model="produto.quantidade" style="float: right; margin-top: -30px; margin-bottom: 0;"></input>
+		      		<p style="float: right; margin-top: -30px; margin-bottom: 0;">{{produto.quantidade}}</p>
+						
+						<i class="icon ion-plus-circled" ng-click="adicionaProduto(produto)"></i>
 		  		</ion-item>
+
 		    </ion-list>
 
-		<label class="item item-input" id="venda-input2" name="valor">
-			<span class="input-label">Total</span>
-			<h2>{{venda.total}}</h2>
-		</label>
 
 
 

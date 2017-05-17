@@ -21,10 +21,14 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 	$scope.novo = true;
 	$scope.venda = {
 		nome: 	'',
-		valor: 	0,
 		tipo: 	'',
 		descricao: '',
-		produtos: []
+
+		produtos: [],
+
+		troco: 0,
+		pagamento: 0,
+		total: 	0
 	};
 
 	if($state.params.indexArray){
@@ -35,11 +39,12 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 
 	$scope.produtosStorage = StorageServiceProdutos.getAll();
 	$scope.produtos = [];
+
 	for (var i = 0; i < $scope.produtosStorage.length; i++) {
 		var produto = {
 			nome: $scope.produtosStorage[i].nome,
 			valor: $scope.produtosStorage[i].valor,
-      id: $scope.produtosStorage[i].id,
+      		id: $scope.produtosStorage[i].id,
 			quantidade: 0
 		};
 		$scope.produtos.push(produto);
@@ -62,17 +67,32 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 		$state.go("tabsController.vendas");
 	};
 
-	$scope.$watch('produtos', function(newVal) {
-		var total = 0;
-        for (var i = 0; i < newVal.length; i++) {
-        	total += (newVal[i].valor * newVal[i].quantidade);
-        };
-        $scope.venda.total = total + $scope.venda.valor;
-    }, true);
+	// $scope.$watch('produtos', function(newVal) {
+	// 	var total = 0;
+    //     for (var i = 0; i < newVal.length; i++) {
+    //     	total += (newVal[i].valor * newVal[i].quantidade);
+    //     };
+    //     $scope.venda.total = total + $scope.venda.valor;
 
-    $scope.$watch('venda.valor', function(newVal) {
-        $scope.venda.total += newVal;
-    }, true);
+    // }, true);
+
+    // $scope.$watch('venda.pagamento', function(newVal) {
+    //     // $scope.venda.troco += newVal;
+	// 	atualizaTroco();
+    // }, true);
+	$scope.adicionaProduto = function(produto) {
+		calculaVenda(true, produto.valor);
+	}
+
+	function calculaVenda(add, valorProduto) {
+
+		if(add)
+			$scope.venda.total += valorProduto;
+		else
+			$scope.venda.total -= valorProduto;
+
+		$scope.venda.troco = $scope.venda.pagamento - $scope.venda.total;
+	}
 
 
 }])
