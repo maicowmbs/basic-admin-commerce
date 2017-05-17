@@ -58,14 +58,27 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 
 	for (var i = 0; i < $scope.produtosStorage.length; i++) {
 		var produto = {
-			nome: $scope.produtosStorage[i].nome,
-			valor: $scope.produtosStorage[i].valor,
-      		id: $scope.produtosStorage[i].id,
-			quantidade: 0
+					nome: $scope.produtosStorage[i].nome,
+					valor: $scope.produtosStorage[i].valor,
+		      id: $scope.produtosStorage[i].id,
+					quantidade: 0
 		};
+		if($scope.venda.produtos.length > 0){
+			_.find($scope.venda.produtos, function(item) {
+								if (item.id === produto.id) {
+									produto.quantidade = item.quantidade;
+								}
+					});
+		}
+
+
 		$scope.produtos.push(produto);
 
 	};
+
+	function verificaProduto(){
+
+	}
 
 
 
