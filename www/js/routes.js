@@ -38,7 +38,7 @@ angular.module('app.routes', [])
   })
   .state('tabsController.venda', {
     cache: false,
-    url: '/venda/:indexArray',
+    url: '/venda/:id',
     views: {
       'tab1': {
         templateUrl: 'templates/venda.html',

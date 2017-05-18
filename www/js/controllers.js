@@ -1,20 +1,19 @@
 angular.module('app.controllers', [])
 
-.controller('vendasCtrl', ['$scope', '$stateParams', '$state','StorageServiceVendas', '$cordovaSocialSharing',
-function ($scope, $stateParams, $state, StorageServiceVendas, $cordovaSocialSharing) {
+.controller('vendasCtrl', ['$scope', '$stateParams', '$state','StorageServiceVendas', '$cordovaSocialSharing', '$filter',
+function ($scope, $stateParams, $state, StorageServiceVendas, $cordovaSocialSharing, $filter) {
 
-	$scope.vendas = StorageServiceVendas.getAll();
+	$scope.vendas = groupByDate(StorageServiceVendas.getAll());
 
-	$scope.direcionaVenda = function(index){
-		$state.go("tabsController.venda", {indexArray: index});
+	$scope.direcionaVenda = function(id){
+		$state.go("tabsController.venda", {id: id});
 	};
 
 
 	$scope.share = function () {
      $cordovaSocialSharing.shareViaEmail('This is my message', 'Subject string', null, 'http://www.mylink.com');
-
 	}
-	console.log($cordovaSocialSharing);
+	//console.log($cordovaSocialSharing);
 
 	$scope.share = function() {
         $cordovaSocialSharing
@@ -25,6 +24,21 @@ function ($scope, $stateParams, $state, StorageServiceVendas, $cordovaSocialShar
                 alert("error : "+err);
             });
     };
+
+		function groupByDate(vendas){
+      var grouped = {};
+      _.forEach(vendas, function(venda){
+          var actualData = $filter('date')(new Date(venda.data), 'dd/MM/yyyy');
+          if ( !grouped[actualData] ){
+            grouped[actualData] = [];
+          }
+          grouped[actualData].push(venda);
+      });
+
+      return grouped;
+  };
+
+  console.log($scope.vendas);
 
 }])
 
@@ -47,9 +61,12 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 		total: 	0
 	};
 
-	if($state.params.indexArray){
-		$scope.indexArray = $state.params.indexArray;
-		$scope.venda = vendas[$scope.indexArray];
+	if($state.params.id){
+		//$scope.indexArray = $state.params.indexArray;
+		//$scope.venda = vendas[$scope.indexArray];
+		$scope.id = $state.params.id;
+		$scope.venda = StorageServiceVendas.get($scope.id);
+		console.log($scope.venda);
 		$scope.novo = false;
 	}
 
@@ -63,7 +80,9 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 		      id: $scope.produtosStorage[i].id,
 					quantidade: 0
 		};
-		if($scope.venda.produtos.length > 0){
+		console.log($scope.novo);
+		//if($scope.venda.produtos.length > 0){
+		if(!$scope.novo){
 			_.find($scope.venda.produtos, function(item) {
 								if (item.id === produto.id) {
 									produto.quantidade = item.quantidade;
@@ -147,6 +166,7 @@ function ($scope, $stateParams, $state, StorageServiceVendas, StorageServiceProd
 
 
 	$scope.add = function(newItem){
+		newItem.data = new Date();
 		StorageServiceVendas.add(newItem);
 		$state.go("tabsController.vendas");
 	};
@@ -218,7 +238,33 @@ function ($scope, $stateParams) {
 
 
 
+	$scope.jsonToExport = [
+  	{
+    	"col1data": "1",
+      "col2data": "Fight Club",
+      "col3data": "Brad Pitt"
+    },
+  	{
+    	"col1data": "2",
+      "col2data": "Matrix (Series)",
+      "col3data": "Keanu Reeves"
+    },
+  	{
+    	"col1data": "3",
+      "col2data": "V for Vendetta",
+      "col3data": "Hugo Weaving"
+    }
+  ];
 
+	// Prepare Excel data:
+	$scope.fileName = "report";
+	$scope.exportData = [];
+  // Headers:
+	$scope.exportData.push(["#", "Movie", "Actor"]);
+  // Data:
+	angular.forEach($scope.jsonToExport, function(value, key) {
+    $scope.exportData.push([value.col1data, value.col2data, value.col3data]);
+	});
 
 
 

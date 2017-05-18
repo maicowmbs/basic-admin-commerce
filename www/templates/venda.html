@@ -2,63 +2,109 @@
   <ion-nav-buttons side="right" class="has-header">
     <button class="button button-icon icon ion-android-cart"></button>
   </ion-nav-buttons>
+
   <ion-content padding="true" class="has-header">
+
     <form id="venda-form1" class="list">
 
-		<label class="item item-input" id="venda-input2" name="valor">
-			<span class="input-label">Pagamento</span>
-			<input ng-change="calculaVenda(null, 0)" ng-model="venda.pagamento" type="number" placeholder="">
-		</label>
-		<label class="item item-input" id="venda-input2" name="valor">
-			<span class="input-label">Total</span>
-			<h2>{{venda.total}}</h2>
-		</label>
-		<label class="item item-input" id="venda-input2" name="troco">
-			<span class="input-label">Troco</span>
-			<h2>{{venda.troco}}</h2>
-		</label>
+      <div class="row">
+        <div class="col ">
+            <!--<button ng-show="novo" id="produto-button3" class="button button-positive  button-block icon-right ion-android-add-circle" ng-click="add(venda)">Adicionar Venda</button>-->
+          <div class="button-bar">
+            <button ng-show="!novo" id="produto-button3" class="button button-assertive button-outline button-block" ng-click="remove(venda)">Excluir</button>
+            <button ng-show="!novo" id="produto-button3" class="button button-outline button-calm  button-block" ng-click="update()">Atualizar</button>
+          </div>
+        </div>
+      </div>
 
-		<label class="item item-input" id="venda-input1" name="nome">
-			<span class="input-label">Descrição</span>
-			<input ng-model="venda.desc" type="text" placeholder="">
-		</label>
+      <div class="row">
+        <div class="col ">
+          <label class="item item-input item-icon-left" id="venda-input1" name="nome" style="height: 100%; padding-left: 54px;">
+            <i class="icon ion-compose"></i>
+      			<span class="input-label">Descrição</span>
+      			<input ng-model="venda.desc" type="text" placeholder=""></input>
+      		</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col ">
+          <label class="item item-select item-icon-left" id="venda-select1" name="tipo" style="padding: 6px 0 5px 54px;">
+            <i class="icon ion-pricetags"></i>
+      			<span class="input-label">Categoria</span>
+      			<select ng-model="venda.categoria">
+      				<option>1</option>
+      				<option>2</option>
+      				<option>3</option>
+      			</select>
+      		</label>
+        </div>
 
-		<label class="item item-select" id="venda-select1" name="tipo">
-			<span class="input-label">Categoria</span>
-			<select ng-model="venda.categoria">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-			</select>
-		</label>
+      </div>
 
-		<label class="item item-input" id="venda-input2" name="valor">
-			<span class="input-label">Produtos</span>
-		</label>
+      <div class="row">
+        <div class="col col-50">
+          <label class="item item-input item-icon-left" id="venda-input2" name="valor" style="height: 100%; padding-left: 54px;">
+            <i class="icon ion-cash"></i>
+      			<span class="input-label">Pag.: R$</span>
+      			<input ng-change="calculaVenda(null, 0)" ng-model="venda.pagamento" type="number" placeholder="">
+      		</label>
+        </div>
+        <div class="col col-50">
+          <label class="item item-input item-icon-left" id="venda-input2" name="troco" style="height: 100%; padding-left: 54px;">
+            <i class="icon ion-cash"></i>
+      			<span class="input-label">Troco:</span>
+      			<h2>R$ {{venda.troco}}</h2>
+      		</label>
+        </div>
+      </div>
+      <!--
+      <div class="row">
 
+          <label class="item center item-icon-left" id="venda-input2" name="valor" style="margin: 0 auto;">
+            <i class="icon ion-cash"></i>
+      			<span class="center">Total</span>
+      			<h2>R$ {{venda.total}}</h2>
+      		</label>
 
+      </div>
+    -->
 
+<div class="row">
+    <div class="col ">
 			<ion-list id="produtos-list" ng-repeat="produto in produtos track by $index">
 
 		      <ion-item id="produtos-list-item" class="item item-icon-left item-icon-right">
-						<i class="icon ion-minus-circled" ng-click="removeProduto(produto)"></i>
+						<i class="icon ion-minus-circled assertive" ng-click="removeProduto(produto)"></i>
 
-		      		<h2>{{produto.nome}}</h2>
-		      		<p>Valor: {{produto.valor}}</p>
-		      		<p>Quantidade</p>
-		      		<p style="float: right; margin-top: -30px; margin-bottom: 0;">{{produto.quantidade}}</p>
+		      		<h2 style="margin-bottom: 10px; text-align: center;"><strong>{{produto.nome}}</strong></h2>
+		      		<p>Valor: R$ {{produto.valor}}</p>
+		      		<p style="float: right; margin-top: -25px; margin-bottom: 0; font-size: 20px; font-weight: bold;">{{produto.quantidade}} unid.</p>
 
-						<i class="icon ion-plus-circled" ng-click="adicionaProduto(produto)"></i>
+						<i class="icon ion-plus-circled balanced" ng-click="adicionaProduto(produto)"></i>
 		  		</ion-item>
 
 		    </ion-list>
-
-
-
-
+    </div>
+</div>
     </form>
-    <button ng-show="novo" id="produto-button3" class="button button-positive  button-block" ng-click="add(venda)">Cadastrar</button>
-    <button ng-show="!novo" id="produto-button3" class="button button-positive  button-block" ng-click="update()">Atualizar</button>
-    <button id="produto-button3" class="button button-positive  button-block" ng-click="remove(venda)">Remover</button>
+
+
+
+
+
   </ion-content>
+  <div class="tabs tabs-icon-top tabs-color-dark" style="padding: 5px 0 5px 0; height: 60px">
+    <a class="tab-item" style="font-size: 17px;color: #fff;">
+      <i class="icon ion-cash balanced"></i>
+      Total: R$ {{venda.total}}
+    </a>
+    <a class="tab-item" style="font-size: 17px;color: #fff;" ng-show="novo" ng-click="add(venda)">
+      <i class="icon ion-checkmark-circled calm"></i>
+      Finalizar
+    </a>
+    <a class="tab-item" style="font-size: 17px;color: #fff;" ng-show="!novo" ng-click="update()">
+      <i class="icon ion-checkmark-circled calm"></i>
+      Atualizar
+    </a>
+  </div>
 </ion-view>

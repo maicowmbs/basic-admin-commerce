@@ -46,7 +46,7 @@ angular.module('app.services', ['ngStorage'])
   };
 })
 
-.factory ('StorageServiceVendas', function ($localStorage) {
+.factory ('StorageServiceVendas', function ($localStorage, _) {
 
   $localStorage = $localStorage.$default({
     vendas: [],
@@ -57,12 +57,16 @@ angular.module('app.services', ['ngStorage'])
     return $localStorage.vendas;
   };
 
-  var _get = function (index) {
-    return $localStorage.vendas[index];
+  var _get = function (id) {
+    var venda;
+        angular.forEach($localStorage.vendas, function(item, key) {
+            if (item.id == parseInt(id)) { venda = item; }
+          })
+          return venda;
   }
 
   var _add = function (venda) {
-    produto.id=$localStorage.contadorVendas;
+    venda.id=$localStorage.contadorVendas;
     $localStorage.contadorVendas++;
     $localStorage.vendas.push(venda);
   }
